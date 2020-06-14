@@ -1,0 +1,32 @@
+{
+  "id": "关卡编号",
+  "type": "程序执行方式", 
+  "codeList":
+  [
+    {
+      "goStraight": 4
+    },
+    {
+      "condition": 
+      {
+        "expression": 1, 
+        "val": 2,
+        "code": 
+        [
+          {
+            "goStraight": -1
+          },
+          {
+            "open": 1
+          }
+        ],
+        "else_code": 
+        [ 
+          {
+            "turnLeft": 1
+          }
+        ]
+      }
+    }
+  ]
+}

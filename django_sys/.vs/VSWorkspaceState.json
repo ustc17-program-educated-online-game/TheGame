@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\game",
+    "\\login\\templates\\login",
+    "\\static",
+    "\\static\\login",
+    "\\static\\login\\fonts",
+    "\\static\\login\\fonts\\font-awesome-4.7.0",
+    "\\static\\login\\fonts\\font-awesome-4.7.0\\css",
+    "\\static\\login\\fonts\\font-awesome-4.7.0\\fonts",
+    "\\static\\login\\fonts\\font-awesome-4.7.0\\scss"
+  ],
+  "SelectedNode": "\\game",
+  "PreviewInSolutionExplorer": false
+}
