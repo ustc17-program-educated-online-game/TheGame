@@ -24,7 +24,8 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', TemplateView.as_view(template_name="index.html")),
-    path('index/', views1.index),
+    path('index/', TemplateView.as_view(template_name="index.html")),
+    path('userInfo/', views1.index),  # To get the user level messag
     path('login/', views1.login),
     path('register/', views1.register),
     path('logout/', views1.logout),
