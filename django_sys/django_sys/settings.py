@@ -61,7 +61,7 @@ ROOT_URLCONF = 'django_sys.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #'DIRS': [],
+        # 'DIRS': [],
         'DIRS': ['frontend/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_DIRS = [
     #os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'frontend/dist'),
+    os.path.join(BASE_DIR, 'frontend/dist/static'),
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
