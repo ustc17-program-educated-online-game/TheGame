@@ -1,0 +1,56 @@
+{
+    "state": "running", 
+    "message": "success",
+    "map": {
+      "id": "关卡编号",
+      "name": "one", 
+      "length": "8",
+      "width": "8",
+      "state": [
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1]
+      ],
+      "start": {
+        "x": "0",
+        "y": "0"
+      },
+      "end": {
+        "x": "7",
+        "y": "7"
+      },
+      "treasure": { 
+        "x": "x坐标",
+        "y": "y坐标",
+        "collected": "0"
+      },
+      "character": {
+        "type": "1", 
+        "x": "0",
+        "y": "0",
+        "state": "u" 
+      }
+    }, 
+    "actionList": [
+      "turnRight",
+      "goUp",
+      "turnRight",
+      "goDown",
+      "turnRight",
+      "isBlank",
+      "isObstacle",
+      "turnLeft",
+      "isTreasure",
+      "isEdge",
+      "goLeft",
+      "turnRight",
+      "goRight",
+      "collectSuccess",
+      "endMissionFail"
+    ]
+  }

@@ -25,9 +25,9 @@
                         <b-nav-item>欢迎玩家{{DataSet.username}}</b-nav-item>
                     </div>
                     <!-- <div>欢迎</div> -->
-                    <b-nav-item href="/#/">注册新账号</b-nav-item>
+                    <b-nav-item href="/register/">注册新账号</b-nav-item>
                     <div v-show = "DataSet.state === 0">
-                        <b-nav-item href="/#/">登录</b-nav-item>
+                        <b-nav-item href="/login/">登录</b-nav-item>
                     </div>
                     <div v-show = "DataSet.state === 1">
                         <b-nav-item-dropdown right>
@@ -36,7 +36,7 @@
                                 我的账号
                             </template>
                             <b-dropdown-item href="#">账号信息</b-dropdown-item>
-                            <b-dropdown-item href="#">退出登录</b-dropdown-item>
+                            <b-dropdown-item href="/logout/">退出登录</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </div>
                 </b-navbar-nav>
@@ -44,7 +44,7 @@
         </b-navbar>
     </div>
 </template>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import LoginTest from './LoginTest.json';
 
@@ -53,19 +53,32 @@ export default {
   data() {
     return {
       DataSet: {
-        state: Number,
+        //user_id: Number,
         username: String,
+        state: Number,
       },
     };
   },
   mounted() {
-    // eslint-disable-next-line no-console
-    console.log(LoginTest);
+    const url = 'http://127.0.0.1:8000/userInfo/';
+    axios.get(url).then(
+      response => {
+        var result = response.data;
+        console.log(result);
+        this.DataSet = result;
+      }
+      ).catch(
+        response => {
+          alert('请求失败');
+          }
+      );
+  },
+  /*mounted() {
+    //console.log(LoginTest);
     this.DataSet = LoginTest;
-    // eslint-disable-next-line no-console
     console.log(this.DataSet.state);
   },
-  /* components: {
+  components: {
     LoginTest,
   }, */
 };
