@@ -1,5 +1,8 @@
 <template>
   <div class="GameBoard border border-primary rounded">
+    <button @click="getMap(1000)" style="top: 2000px; position: absolute;">
+      Click here
+    </button>
     <div v-for="(states, index1) in DataSet.map.state" :key="index1">
       <div v-for="(state, index2) in states" :key="index2">
         <map-block
@@ -19,64 +22,71 @@
 </template>
 
 <script>
-import TestJson from './test.json';
 import MapBlock from './GameBoard/MapBlock.vue';
 
 export default {
   name: 'GameBoard',
   data() {
     return {
+      initialization: null,
       DataSet: {
         state: String,
         message: String,
         map: {
-          id: Number,
-          name: String,
-          length: Number,
-          width: Number,
-          state: null,
-          start: {
-            x: Number,
-            y: Number,
-          },
-          end: {
-            x: Number,
-            y: Number,
-          },
-          treasure: {
-            x: Number,
-            y: Number,
-            collected: Boolean,
-          },
           character: {
             type: Number,
             x: Number,
             y: Number,
             state: String,
           },
+          end: {
+            x: Number,
+            y: Number,
+          },
+          id: Number,
+          length: Number,
+          name: String,
+          start: {
+            x: Number,
+            y: Number,
+          },
+          state: null,
+          treasure: {
+            x: Number,
+            y: Number,
+            collected: Boolean,
+          },
+          width: Number,
         },
         actionList: null,
       },
     };
   },
-  created() {
-    this.DataSet = JSON.parse(JSON.stringify(TestJson));
-  },
   components: {
     MapBlock,
   },
   methods: {
-    getMap(mapid) {
-      const ThisComponent = this;
-      const MapDatabaseQueryPath = '';
-      ThisComponent.$http.get(MapDatabaseQueryPath + mapid).then((response) => {
-        ThisComponent.DataSet = JSON.parse(response.body);
-      });
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
     },
-    setMap(mapid) {
-      this.map = {
-        id: mapid,
-      };
+    getMap(mapid) {
+      const MapDatabaseQueryPath = '/mapInfo/';
+      this.$http({
+        url: MapDatabaseQueryPath,
+        method: 'post',
+        data: {
+          id: mapid,
+        },
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      }).then((response) => {
+        this.DataSet.map = response.data.map;
+        this.initialization = JSON.parse(JSON.stringify(this.DataSet));
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     takeAction(action) {
       if (action === 'goUp') {
@@ -116,7 +126,7 @@ export default {
       }
     },
     clear() {
-      this.DataSet = JSON.parse(JSON.stringify(TestJson));
+      this.DataSet = JSON.parse(JSON.stringify(this.initialization));
     },
   },
 };

@@ -278,7 +278,7 @@ def map_editor(request):
 # return map information
 def map_info(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
+        data = json.loads(request.body.decode('utf-8'))
         try:
             map0 = models.Map.objects.get(id=data['id'])
         except:

@@ -8,6 +8,7 @@
     <hint-info ref="HintInfo"></hint-info>
     <code-start
       @takeAction="takeAction($event)"
+      @execute="execute(arguments)"
       @clear="clear()"
       ref="code-block"
     >
@@ -37,8 +38,34 @@ export default {
     HintInfo,
   },
   methods: {
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    },
     takeAction(event) {
       this.$refs.GameBoard.takeAction(event);
+    },
+    execute(arg) {
+      const mapid = this.$refs.GameBoard.DataSet.map.id;
+      const passData = {
+        id: mapid,
+        type: arg[1],
+        codeList: arg[0].codes,
+      };
+      const ActionAnalyzePath = '/game/';
+      this.$http({
+        url: ActionAnalyzePath,
+        method: 'post',
+        data: passData,
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      }).then((response) => {
+        this.$refs.CodeStart.actions = response.data.actionList;
+        this.$refs.CodeStart.getActions(passData.type);
+      }).catch((error) => {
+        console.log(error);
+      });
     },
     clear() {
       this.$refs.GameBoard.clear();

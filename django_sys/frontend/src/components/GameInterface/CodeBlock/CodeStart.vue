@@ -58,7 +58,6 @@
 import draggable from 'vuedraggable';
 import vueCustomScrollbar from 'vue-custom-scrollbar';
 import nestedDraggable from './NestedDraggable.vue';
-import testJSON from '../Interface/test.json';
 
 let idGlobal = 0;
 
@@ -188,8 +187,7 @@ export default {
           newcodes += ']}';
           newcodes += '}';
         } else if (object.innerText === '走') {
-          newcodes += '"go":"';
-          // eslint-disable-next-line no-console
+          newcodes += '"goStraight":"';
           newcodes += object.nextSibling.children[0].value;
           newcodes += '"}';
         } else if (object.innerText === '向左转') {
@@ -214,16 +212,13 @@ export default {
       FirstSentence = FirstSentence.children[0].children[0].children[0];
       let codesstring = this.getCodes(FirstSentence, '');
       codesstring = `{"codes":[${codesstring}]}`;
-      // eslint-disable-next-line no-console
-      console.log(codesstring);
       const codes = JSON.parse(codesstring);
-      // eslint-disable-next-line no-console
-      console.log(codes);
-      this.getActions(mode);
+      this.$emit('execute', codes, mode);
+      // this.getActions(mode);
     },
     getActions(mode) {
       let i = this.step;
-      const actions = testJSON.actionList;
+      const { actions } = this;
       if (mode === 'continue') {
         const loop = setInterval(() => {
           if (actions[i] !== 'endMissionSuccess' && actions[i] !== 'endMissionFail') {
