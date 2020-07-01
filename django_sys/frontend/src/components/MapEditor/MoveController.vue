@@ -24,32 +24,24 @@ export default {
 position: absolute;
   top: 40%;
   left: 15%;
-  width: 30%;
-  height: 10%;
 }
 
 .btn-move-right{
 position: absolute;
   top: 40%;
   right: 15%;
-  width: 30%;
-  height: 10%;
 }
 
 .btn-move-up{
 position: absolute;
   top: 20%;
   left: 35%;
-  width: 30%;
-  height: 10%;
 }
 
 .btn-move-down{
   position: absolute;
   top: 60%;
-  right: 35%;
-  width: 30%;
-  height: 10%;
+  left: 30%;
 }
 
 .move-controller {
