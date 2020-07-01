@@ -74,16 +74,17 @@ def index(request):
     user_id = request.session.get('user_id', None)
     user_name = request.session.get('user_name', None)
     if not request.session.get('is_login', None):
-        user_level = 1
+        user_level = 0
     else:
-        user_level = 2
-    return JsonResponse({'user_id': user_id, 'user_name': user_name, 'user_level': user_level})
+        user_level = 1
+    return JsonResponse({'user_id': user_id, 'username': user_name, 'state': user_level})
     #else:
         #return render(request, 'login/index.html', locals())
 
 def login(request):
     if request.session.get('is_login', None):
-        return redirect('/index/')
+        print('is login!')
+        return redirect('/')
     if request.method == 'POST':
         login_form = forms.UserForm(request.POST)
         message = '请检查填写的内容！'
@@ -105,7 +106,7 @@ def login(request):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
-                return redirect('/index/')
+                return redirect('/')
             else:
                 message = '密码不正确！'
                 return render(request, 'login/login.html', locals())
@@ -118,7 +119,7 @@ def login(request):
 
 def register(request):
     if request.session.get('is_login', None):
-        return redirect('/index/')
+        return redirect('/')
 
     if request.method == 'POST':
         register_form = forms.RegisterForm(request.POST)

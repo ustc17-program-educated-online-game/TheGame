@@ -68,9 +68,9 @@ export default {
   methods: {
     getMap(mapid) {
       const ThisComponent = this;
-      const MapDatabaseQueryPath = '';
+      const MapDatabaseQueryPath = 'http://127.0.0.1:8000/mapInfo/';
       ThisComponent.$http.get(MapDatabaseQueryPath + mapid).then((response) => {
-        ThisComponent.DataSet = JSON.parse(response.body);
+        ThisComponent.DataSet = response.data;
       });
     },
     setMap(mapid) {
