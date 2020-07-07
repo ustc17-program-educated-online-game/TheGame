@@ -191,9 +191,9 @@ export default {
           newcodes += object.nextSibling.children[0].value;
           newcodes += '"}';
         } else if (object.innerText === '向左转') {
-          newcodes += '"turnleft": "1"}';
+          newcodes += '"turnLeft": "1"}';
         } else if (object.innerText === '向右转') {
-          newcodes += '"turnright": "1"}';
+          newcodes += '"turnRight": "1"}';
         } else if (object.innerText === '打开') {
           newcodes += '"open": "1"}';
         }

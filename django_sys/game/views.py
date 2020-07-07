@@ -64,7 +64,8 @@ def code_action(map, codeList0):
     direction = map.character.state
     while len(codeList) != 0:
         code = codeList.pop(0) #code是dict类型
-        if code['goStraight'] != 0:
+        print(code) #for test
+        if 'goStraight' in code.keys() and code['goStraight'] != 0:
             if code['goStraight'] != -1:
                 number = int(code['goStraight'])
             else:
@@ -104,7 +105,8 @@ def code_action(map, codeList0):
                         break
             map.character.x = x
             map.character.y = y
-        elif code['turnLeft'] == 1:
+        elif 'turnLeft' in code.keys() and code['turnLeft'] == '1':
+            print('success')
             if direction == 'u':
                 direction = 'l'
             elif direction == 'd':
@@ -115,7 +117,7 @@ def code_action(map, codeList0):
                 direction = 'u'
             actionList.append('turnLeft')
             map.character.state = direction
-        elif code['turnRight'] == 1:
+        elif 'turnRight' in code.keys() and code['turnRight'] == '1':
             if direction == 'u':
                 direction = 'r'
             elif direction == 'd':
@@ -126,7 +128,7 @@ def code_action(map, codeList0):
                 direction = 'd'
             actionList.append('turnRight')
             map.character.state = direction
-        elif code['inspect'] == 1:
+        elif 'inspect' in code.keys() and code['inspect'] == '1':
             result = inspect(map)
             if result == 1:
                 actionList.append('isBlank')
@@ -136,7 +138,7 @@ def code_action(map, codeList0):
                 actionList.append('isTreasure')
             elif result == 0:
                 actionList.append('isEdge')
-        elif code['condition']:
+        elif 'condition' in code.keys() and code['condition']:
             inspect_result = inspect(map)
             if code['condition']['expression'] == 1:
                 if inspect_result == code['condition']['val']:
@@ -155,7 +157,7 @@ def code_action(map, codeList0):
             direction = map.character.state
             for i in code_result['actionList']:
                 actionList.append(i)
-        elif code['circulate']:
+        elif 'circulate' in code.keys() and code['circulate']:
             i = 0 #for safe
             while i < 999999 :
                 i = i + 1
@@ -177,7 +179,7 @@ def code_action(map, codeList0):
                 direction = map.character.state
                 for action in code_result['actionList']:
                     actionList.append(action)
-        elif code['open'] == 1:
+        elif 'open' in code.keys() and code['open'] == 1:
             if map.state[x][y] == 3 or map.state[x][y] == '3':
                 actionList.append('collectSuccess')
                 map.treasure.collected = 1

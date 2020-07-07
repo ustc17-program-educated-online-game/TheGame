@@ -1,6 +1,6 @@
 <template>
   <div class="GameBoard border border-primary rounded">
-    <button @click="getMap(1000)" style="top: 2000px; position: absolute;">
+    <button @click="getMap(1000)" style="top: 200px; position: absolute;">
       Click here
     </button>
     <div v-for="(states, index1) in DataSet.map.state" :key="index1">
