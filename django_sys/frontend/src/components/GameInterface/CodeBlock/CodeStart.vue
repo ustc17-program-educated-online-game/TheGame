@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       step: 0,
-      actions: null,
+      actions: 0,
       settings: {
         maxScrollbarLength: 160,
       },
@@ -157,7 +157,7 @@ export default {
           val = val.options[val.selectedIndex].value;
           newcodes += val;
           // add codes part to newcodes
-          newcodes += ',"codes":[';
+          newcodes += ',"code":[';
           let codes = object.parentNode.parentNode.nextSibling;
           // eslint-disable-next-line prefer-destructuring
           codes = codes.children[0].children[0].children[0].children[0];
@@ -178,7 +178,7 @@ export default {
           val = val.options[val.selectedIndex].value;
           newcodes += val;
           // add codes part to newcodes
-          newcodes += ',"codes":[';
+          newcodes += ',"code":[';
           let codes = object.parentNode.parentNode.nextSibling;
           // eslint-disable-next-line prefer-destructuring
           codes = codes.children[0].children[0].children[0].children[0];

@@ -10,7 +10,7 @@
       @takeAction="takeAction($event)"
       @execute="execute(arguments)"
       @clear="clear()"
-      ref="code-block"
+      ref="CodeStart"
     >
     </code-start>
     <div class="btn-group info-group" role="group" aria-label="Basic example">
