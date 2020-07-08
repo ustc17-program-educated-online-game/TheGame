@@ -33,22 +33,22 @@ def inspect(map):
     x = map.character.x
     y = map.character.y
     direction = map.character.state
-    if direction == 'u':
+    if direction == 'r':
         if y < map.width-1:
             result = int(map.state[x][y+1])
         else:
             result = 0
-    if direction == 'd':
+    if direction == 'l':
         if y > 0:
             result = int(map.state[x][y-1])
         else:
             result = 0
-    if direction == 'l':
+    if direction == 'u':
         if x > 0:
             result = int(map.state[x-1][y])
         else:
             result = 0
-    if direction == 'r':
+    if direction == 'd':
         if x < map.length-1:
             result = int(map.state[x+1][y])
         else:
@@ -71,42 +71,41 @@ def code_action(map, codeList0):
             else:
                 number = 1
             i = 0
-            if direction == 'u':
+            if direction == 'r':
                 while i < number:
                     if y < map.width-1 and map.state[x][y+1] != '2' and map.state[x-1][y] != 2:
                         y = y + 1
+                        i = i + 1
+                        actionList.append('goRight')
+                    else:
+                        break
+            elif direction == 'l':
+                while i < number:
+                    if y > 0 and map.state[x][y-1] != '2' and map.state[x][y-1] != 2:
+                        y = y - 1
+                        i = i + 1
+                        actionList.append('goLeft')
+                    else:
+                        break
+            elif direction == 'u':
+                while i < number:
+                    if x > 0 and map.state[x-1][y] != '2' and map.state[x-1][y] != 2:
+                        x = x - 1
                         i = i + 1
                         actionList.append('goUp')
                     else:
                         break
             elif direction == 'd':
                 while i < number:
-                    if y > 0 and map.state[x][y-1] != '2' and map.state[x][y-1] != 2:
-                        y = y - 1
-                        i = i + 1
-                        actionList.append('goDown')
-                    else:
-                        break
-            elif direction == 'l':
-                while i < number:
-                    if x > 0 and map.state[x-1][y] != '2' and map.state[x-1][y] != 2:
-                        x = x - 1
-                        i = i + 1
-                        actionList.append('goLeft')
-                    else:
-                        break
-            elif direction == 'r':
-                while i < number:
                     if x < map.length-1 and map.state[x+1][y] != '2' and map.state[x+1][y] != 2:
                         x = x + 1
                         i = i + 1
-                        actionList.append('goRight')
+                        actionList.append('goDown')
                     else:
                         break
             map.character.x = x
             map.character.y = y
         elif 'turnLeft' in code.keys() and code['turnLeft'] == '1':
-            print('success')
             if direction == 'u':
                 direction = 'l'
             elif direction == 'd':
@@ -179,7 +178,7 @@ def code_action(map, codeList0):
                 direction = map.character.state
                 for action in code_result['actionList']:
                     actionList.append(action)
-        elif 'open' in code.keys() and code['open'] == 1:
+        elif 'open' in code.keys() and code['open'] == '1':
             if map.state[x][y] == 3 or map.state[x][y] == '3':
                 actionList.append('collectSuccess')
                 map.treasure.collected = 1
@@ -230,6 +229,8 @@ def game(request):
         result = code_action(map, data['codeList'])#dict类型
         x = result['map'].character.x 
         y = result['map'].character.y
+        print(x)
+        print(y)
         if map.end.x == x and map.end.y == y:
             if map.treasure is not None:
                 if result['map'].treasure.collected == 1:
