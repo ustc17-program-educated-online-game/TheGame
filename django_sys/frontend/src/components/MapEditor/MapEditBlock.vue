@@ -3,7 +3,18 @@
   :style="BlockPosition" @click="SelectBlock">
     <div class="Empty" v-if="state == 1">
       <div class="Character-show" v-if="x == character.x && y == character.y">
-        <img src="../../img/character.jpg">
+        <div v-if="character.state == 'u'">
+          <img src="../../img/character_u.jpg">
+        </div>
+        <div v-if="character.state == 'd'">
+          <img src="../../img/character_d.jpg">
+        </div>
+        <div v-if="character.state == 'l'">
+          <img src="../../img/character_l.jpg">
+        </div>
+        <div v-if="character.state == 'r'">
+          <img src="../../img/character_r.jpg">
+        </div>
       </div>
       <span class="decription"
       v-if="x == end.x && y == end.y">

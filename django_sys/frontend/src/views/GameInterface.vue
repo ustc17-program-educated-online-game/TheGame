@@ -61,6 +61,7 @@ export default {
         data: passData,
         headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
       }).then((response) => {
+        console.log(response.data.actionList);
         this.$refs.CodeStart.actions = response.data.actionList;
         this.$refs.CodeStart.getActions(passData.type);
       }).catch((error) => {
