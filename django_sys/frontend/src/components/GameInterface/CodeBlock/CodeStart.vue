@@ -214,7 +214,6 @@ export default {
       codesstring = `{"codes":[${codesstring}]}`;
       const codes = JSON.parse(codesstring);
       this.$emit('execute', codes, mode);
-      // this.getActions(mode);
     },
     getActions(mode) {
       let i = this.step;
@@ -230,10 +229,8 @@ export default {
           } else {
             clearInterval(loop);
             if (actions[i] === 'endMissionSuccess') {
-              // eslint-disable-next-line no-console
               console.log('success');
             } else if (actions[i] === 'endMissionFail') {
-              // eslint-disable-next-line no-console
               console.log('fail');
             }
           }
@@ -242,10 +239,8 @@ export default {
         this.takeActions(actions[this.step]);
         this.step += 1;
         if (actions[this.step] === 'endMissionSuccess') {
-          // eslint-disable-next-line no-console
           console.log('success');
         } else if (actions[this.step] === 'endMissionFail') {
-          // eslint-disable-next-line no-console
           console.log('fail');
         }
       }

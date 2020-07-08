@@ -118,11 +118,9 @@ export default {
           this.DataSet.map.character.state = 'u';
         }
       } else if (action === 'collectSuccess') {
-        // eslint-disable-next-line no-console
-        console.log('success');
+        console.log('collect_success');
       } else if (action === 'collectFail') {
-        // eslint-disable-next-line no-console
-        console.log('success');
+        console.log('collect_fail');
       }
     },
     clear() {
