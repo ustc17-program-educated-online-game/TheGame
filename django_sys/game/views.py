@@ -143,12 +143,14 @@ def code_action(map, codeList0):
                 if inspect_result == code['condition']['val']:
                     inner_code = code['condition']['code']
                 else:
-                    inner_code = code['condition']['else_code']
+                    inner_code = []
+                    # inner_code = code['condition']['else_code']
             elif code['condition']['expression'] == 2:
                 if inspect_result != code['condition']['val']:
                     inner_code = code['condition']['code']
                 else:
-                    inner_code = code['condition']['else_code']
+                    inner_code = []
+                    # inner_code = code['condition']['else_code']
             code_result = code_action(map, inner_code)
             map = code_result['map']
             x = map.character.x
@@ -157,8 +159,8 @@ def code_action(map, codeList0):
             for i in code_result['actionList']:
                 actionList.append(i)
         elif 'circulate' in code.keys() and code['circulate']:
-            i = 0 #for safe
-            while i < 999999 :
+            i = 0  # for safe
+            while i < 99:
                 i = i + 1
                 inspect_result = inspect(map)
                 if code['circulate']['expression'] == 1:
@@ -179,12 +181,12 @@ def code_action(map, codeList0):
                 for action in code_result['actionList']:
                     actionList.append(action)
         elif 'open' in code.keys() and code['open'] == '1':
+            print("open: ", x, y, map.state[x][y])
             if map.state[x][y] == 3 or map.state[x][y] == '3':
                 actionList.append('collectSuccess')
                 map.treasure.collected = 1
             else:
                 actionList.append('collectFail')
-    print("actionList:",actionList)
     return {'map': map, 'actionList': actionList}
 
 def transfer(map):
@@ -217,10 +219,12 @@ def ClassToDict(obj):
             pr[name] = value
     return pr
 
+
 def game(request):
     if request.method == 'POST':
-        print("request:",request.body.decode("utf-8")) #for test
+        #print("request:", request.body.decode("utf-8")) #for test
         data = json.loads(request.body)
+        print("game: ", data)
         try:
             map0 = models.Map.objects.get(id=data['id'])
         except:
@@ -229,21 +233,23 @@ def game(request):
         result = code_action(map, data['codeList'])#dict类型
         x = result['map'].character.x 
         y = result['map'].character.y
-        print(x)
-        print(y)
         if map.end.x == x and map.end.y == y:
-            if map.treasure is not None:
+            if map0.treasurex is not None:
                 if result['map'].treasure.collected == 1:
                     result['actionList'].append('endMissionSuccess')
+                    print("actionList:", result['actionList'])
                     return JsonResponse({'state': 'end', 'message': 'success', 'map': ClassToDict(result['map']), 'actionList': result['actionList']})
                 else:
                     result['actionList'].append('endMissionFail')
+                    print("actionList:", result['actionList'])
                     return JsonResponse({'state': 'end', 'message': 'treasure not collected', 'map': ClassToDict(result['map']), 'actionList': result['actionList']})
             else:
                 result['actionList'].append('endMissionSuccess')
+                print("actionList:", result['actionList'])
                 return JsonResponse({'state': 'end', 'message': 'success', 'map': ClassToDict(result['map']), 'actionList': result['actionList']})
         else:
             result['actionList'].append('endMissionFail')
+            print("actionList:", result['actionList'])
             return JsonResponse({'state': 'end', 'message': 'destination not arrive', 'map': ClassToDict(result['map']), 'actionList': result['actionList']})
     #else:
         #return render(request, 'test.html',locals())#for test
@@ -252,6 +258,7 @@ def game(request):
 def map_editor(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        print("map_editor: ", data)
         id = data['user_id']
         map = models.Map()
         map.id = id
@@ -282,6 +289,7 @@ def map_editor(request):
 def map_info(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
+        print("map_info: ", data)
         try:
             map0 = models.Map.objects.get(id=data['id'])
         except:

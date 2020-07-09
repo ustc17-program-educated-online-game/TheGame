@@ -15,8 +15,8 @@ class Map(models.Model):
     starty = models.IntegerField()
     endx = models.IntegerField()
     endy = models.IntegerField()
-    treasurex = models.IntegerField()
-    treasurey = models.IntegerField()
+    treasurex = models.IntegerField(null=True, blank=True)
+    treasurey = models.IntegerField(null=True, blank=True)
 
     #人物形象和初始时朝向信息
     characterType = models.IntegerField()
