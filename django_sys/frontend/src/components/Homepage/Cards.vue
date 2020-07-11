@@ -35,32 +35,36 @@
     -->
     <div>
         <b-card-group deck>
-            <b-card title="开始游戏" img-src="https://placekitten.com/g/300/450" img-alt="Image" img-top>
+            <b-card title="开始游戏" img-src="" img-alt="Image" img-top>
             <b-card-text>
                 点击下面的按钮开始游戏
             </b-card-text>
             <a href="/#/GameInterface" class="card-link">点我开始</a>
+            <img src="../../img/card1.jpg" class="picture">
             </b-card>
 
-            <b-card title="背景故事" img-src="https://placekitten.com/g/300/450" img-alt="Image" img-top>
+            <b-card title="背景故事" img-src="" img-alt="Image" img-top>
             <b-card-text>
                 在这里写游戏背景的简述
             </b-card-text>
             <a href="#" class="card-link">详细了解</a>
+            <img src="../../img/card2.jpg" class="picture">
             </b-card>
 
-            <b-card title="游戏帮助" img-src="https://placekitten.com/g/300/450" img-alt="Image" img-top>
+            <b-card title="游戏帮助" img-src="" img-alt="Image" img-top>
             <b-card-text>
                 可以查看游戏的玩法和一些小技巧
             </b-card-text>
             <a href="#" class="card-link">查看帮助</a>
+            <img src="../../img/card3.jpg" class="picture">
             </b-card>
 
-            <b-card title="游戏设置" img-src="https://placekitten.com/g/300/450" img-alt="Image" img-top>
+            <b-card title="游戏设置" img-src="" img-alt="Image" img-top>
             <b-card-text>
                 可以在这里调整游戏的设置
             </b-card-text>
             <a href="#" class="card-link">调整设置</a>
+            <img src="../../img/card4.jpg" class="picture">
             </b-card>
         </b-card-group>
     </div>
@@ -74,4 +78,8 @@ export default {
 </script>
 
 <style>
+.picture{
+    width: 90%;
+    height: 300%;
+}
 </style>
