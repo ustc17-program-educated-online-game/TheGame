@@ -82,6 +82,7 @@ export default {
         },
         headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
       }).then((response) => {
+        console.log(response);
         this.DataSet.map = response.data.map;
         this.initialization = JSON.parse(JSON.stringify(this.DataSet));
       }).catch((error) => {

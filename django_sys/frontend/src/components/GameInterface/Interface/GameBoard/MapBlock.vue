@@ -80,13 +80,15 @@ export default {
   data() {
     const valueLeft = `${(this.x / this.width) * 100}%`;
     const valueRight = `${(this.y / this.length) * 100}%`;
+    const valueWidth = `${(1 / this.length) * 100}%`;
+    const valueHeight = `${(1 / this.width) * 100}%`;
     return {
       BlockPosition: {
         position: 'absolute',
         left: valueRight,
         top: valueLeft,
-        width: '12.5%',
-        height: '12.5%',
+        width: valueWidth,
+        height: valueHeight,
         padding: '0',
       },
     };
