@@ -87,13 +87,8 @@ export default {
         position: 'absolute',
         left: valueRight,
         top: valueLeft,
-<<<<<<< HEAD
-        width: '10%',
-        height: '10%',
-=======
         width: valueWidth,
         height: valueHeight,
->>>>>>> 3d9711cd4786690f5df524e8e44d7be3c0711d38
         padding: '0',
       },
     };
