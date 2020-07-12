@@ -9,11 +9,15 @@
     <success-info
       ref="SuccessInfo"
       mapid="第一关"></success-info>
+    <fail-info
+      ref="FailInfo"
+      mapid="第一关"></fail-info>
     <code-start
       @takeAction="takeAction($event)"
       @execute="execute(arguments)"
       @clear="clear()"
       @MissionSuccess="ShowSuccessInfo"
+      @MissionFail="ShowFailInfo"
       ref="CodeStart"
     >
     </code-start>
@@ -32,6 +36,7 @@ import GameBoard from '../components/GameInterface/Interface/GameBoard.vue';
 import CheckPointInfo from '../components/GameInterface/Interface/CheckPointInfo.vue';
 import HintInfo from '../components/GameInterface/Interface/HintInfo.vue';
 import SuccessInfo from '../components/GameInterface/Interface/SuccessInfo.vue';
+import FailInfo from '../components/GameInterface/Interface/FailInfo.vue';
 import CodeStart from '../components/GameInterface/CodeBlock/CodeStart.vue';
 
 export default {
@@ -42,6 +47,7 @@ export default {
     CheckPointInfo,
     HintInfo,
     SuccessInfo,
+    FailInfo,
   },
   methods: {
     getCookie(name) {
@@ -85,6 +91,9 @@ export default {
     },
     ShowSuccessInfo() {
       this.$refs.SuccessInfo.visible = true;
+    },
+    ShowFailInfo() {
+      this.$refs.FailInfo.visible = true;
     },
   },
 };

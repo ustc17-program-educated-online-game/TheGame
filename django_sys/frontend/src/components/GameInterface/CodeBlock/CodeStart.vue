@@ -234,7 +234,7 @@ export default {
               console.log('success');
               this.$emit('MissionSuccess');
             } else if (actions[i] === 'endMissionFail') {
-              this.$emit('MissionSuccess');
+              this.$emit('MissionFail');
               console.log('fail');
             }
           }
