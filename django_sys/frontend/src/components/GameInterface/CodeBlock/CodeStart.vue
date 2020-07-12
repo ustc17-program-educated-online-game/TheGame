@@ -51,6 +51,12 @@
     >
       清空
     </button>
+    <button
+      type="button"
+      class="btn btn-warning btn-restoration"
+    >
+      复位小人
+    </button>
   </div>
 </template>
 
@@ -72,8 +78,6 @@ export default {
     return {
       step: 0,
       actions: 0,
-      sucVisible: false,
-      failVisible: false,
       settings: {
         maxScrollbarLength: 160,
       },
@@ -257,8 +261,6 @@ export default {
     clear() {
       this.list = [];
       this.step = 0;
-      this.sucVisible = false;
-      this.failVisible = false;
       this.$emit('clear');
     },
   },
@@ -297,6 +299,12 @@ export default {
   position: absolute;
   left: -1%;
   bottom: 84px;
+  width: 18%;
+}
+.btn-restoration {
+  position: absolute;
+  left: -1%;
+  bottom: 124px;
   width: 18%;
 }
 .scroll-area {
