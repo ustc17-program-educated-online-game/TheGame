@@ -1,28 +1,29 @@
 <template>
   <div class="card card-info" v-if="visible">
     <div class="card-header">
-      关卡信息
+      {{mapid}}
     </div>
     <div class="card-body">
-      <h5 class="card-title">第一关</h5>
+      <h5 class="card-title"></h5>
       <div
       class="card-text"
       >
-      {{desc}}</div>
+      游戏成功</div>
       <a @click="visible=false" class="btn btn-outline-danger close-info">关闭</a>
+      <a class="btn btn-outline-danger close-info">下一关</a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CheckPointInfo',
+  name: 'SuccessInfo',
   props: {
-    desc: String,
+    mapid: String,
   },
   data() {
     return {
-      visible: false,
+      visible: true,
     };
   },
 };

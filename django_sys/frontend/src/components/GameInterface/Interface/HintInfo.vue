@@ -8,7 +8,7 @@
       <div
       class="card-text"
       >
-      hint</div>
+      {{hint}}</div>
       <a @click="visible=false" class="btn btn-outline-danger close-info">关闭</a>
     </div>
   </div>
@@ -16,9 +16,9 @@
 
 <script>
 export default {
-  name: 'CheckPointInfo',
+  name: 'HintInfo',
   props: {
-    desc: String,
+    hint: String,
   },
   data() {
     return {

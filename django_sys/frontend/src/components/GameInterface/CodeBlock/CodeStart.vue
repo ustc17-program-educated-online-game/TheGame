@@ -72,6 +72,8 @@ export default {
     return {
       step: 0,
       actions: 0,
+      sucVisible: false,
+      failVisible: false,
       settings: {
         maxScrollbarLength: 160,
       },
@@ -239,8 +241,10 @@ export default {
         this.takeActions(actions[this.step]);
         this.step += 1;
         if (actions[this.step] === 'endMissionSuccess') {
+          this.sucVisible = true;
           console.log('success');
         } else if (actions[this.step] === 'endMissionFail') {
+          this.sucVisible = true;
           console.log('fail');
         }
       }
@@ -251,6 +255,8 @@ export default {
     clear() {
       this.list = [];
       this.step = 0;
+      this.sucVisible = false;
+      this.failVisible = false;
       this.$emit('clear');
     },
   },

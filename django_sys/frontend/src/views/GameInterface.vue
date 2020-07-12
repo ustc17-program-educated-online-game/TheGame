@@ -6,6 +6,9 @@
     </game-board>
     <check-point-info ref="CheckInfo"></check-point-info>
     <hint-info ref="HintInfo"></hint-info>
+    <success-info
+      ref="SuccessInfo"
+      mapid="第一关"></success-info>
     <code-start
       @takeAction="takeAction($event)"
       @execute="execute(arguments)"
@@ -27,6 +30,7 @@
 import GameBoard from '../components/GameInterface/Interface/GameBoard.vue';
 import CheckPointInfo from '../components/GameInterface/Interface/CheckPointInfo.vue';
 import HintInfo from '../components/GameInterface/Interface/HintInfo.vue';
+import SuccessInfo from '../components/GameInterface/Interface/SuccessInfo.vue';
 import CodeStart from '../components/GameInterface/CodeBlock/CodeStart.vue';
 
 export default {
@@ -36,6 +40,7 @@ export default {
     GameBoard,
     CheckPointInfo,
     HintInfo,
+    SuccessInfo,
   },
   methods: {
     getCookie(name) {
