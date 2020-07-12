@@ -232,7 +232,9 @@ export default {
             clearInterval(loop);
             if (actions[i] === 'endMissionSuccess') {
               console.log('success');
+              this.$emit('MissionSuccess');
             } else if (actions[i] === 'endMissionFail') {
+              this.$emit('MissionSuccess');
               console.log('fail');
             }
           }

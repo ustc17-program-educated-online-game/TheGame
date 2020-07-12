@@ -8,7 +8,7 @@
       <div
       class="card-text"
       >
-      游戏成功</div>
+      打开宝箱并到达目的地，通关成功</div>
       <a @click="visible=false" class="btn btn-outline-danger close-info">关闭</a>
       <a class="btn btn-outline-danger close-info">下一关</a>
     </div>
@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      visible: true,
+      visible: false,
     };
   },
 };

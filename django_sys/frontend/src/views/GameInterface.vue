@@ -13,6 +13,7 @@
       @takeAction="takeAction($event)"
       @execute="execute(arguments)"
       @clear="clear()"
+      @MissionSuccess="ShowSuccessInfo"
       ref="CodeStart"
     >
     </code-start>
@@ -81,6 +82,9 @@ export default {
     },
     ShowHintInfo() {
       this.$refs.HintInfo.visible = true;
+    },
+    ShowSuccessInfo() {
+      this.$refs.SuccessInfo.visible = true;
     },
   },
 };
