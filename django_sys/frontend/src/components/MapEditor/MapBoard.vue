@@ -224,14 +224,12 @@ export default {
             this.DataSet.map.treasure.y = '-1';
           }
           this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] = 2;
+        } else if (this.DataSet.map.treasure.x === '-1') {
+          this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] = 3;
+          this.DataSet.map.treasure.x = this.SelectBlock.x.toString();
+          this.DataSet.map.treasure.y = this.SelectBlock.y.toString();
         } else {
-          if (this.DataSet.map.treasure.x === '-1') {
-            this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] = 3;
-            this.DataSet.map.treasure.x = this.SelectBlock.x.toString();
-            this.DataSet.map.treasure.y = this.SelectBlock.y.toString();
-          } else {
-            alert('最多有一个宝藏');
-          }
+          alert('最多有一个宝藏');
         }
       }
       this.updateMap();
