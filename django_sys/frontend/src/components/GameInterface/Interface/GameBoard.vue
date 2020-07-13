@@ -81,6 +81,7 @@ export default {
           id: mapid,
         },
         headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+        credentials: 'include',
       }).then((response) => {
         console.log(response);
         this.DataSet.map = response.data.map;

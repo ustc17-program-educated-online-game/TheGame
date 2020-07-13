@@ -91,9 +91,11 @@ export default {
     },
     ShowSuccessInfo() {
       this.$refs.SuccessInfo.visible = true;
+      this.$refs.GameBoard.clear();
     },
     ShowFailInfo() {
       this.$refs.FailInfo.visible = true;
+      this.$refs.GameBoard.clear();
     },
   },
 };

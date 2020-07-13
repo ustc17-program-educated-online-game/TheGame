@@ -21,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '&a_3m5a5mt6xq@w7(%(6@-jvwyc*zobbr3$uakz=@w8x!6jdb2'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -55,7 +54,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-
 ROOT_URLCONF = 'django_sys.urls'
 
 TEMPLATES = [

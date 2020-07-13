@@ -54,6 +54,7 @@
     <button
       type="button"
       class="btn btn-warning btn-restoration"
+      @click="reset()"
     >
       复位小人
     </button>
@@ -81,6 +82,7 @@ export default {
       settings: {
         maxScrollbarLength: 160,
       },
+      loop: -1,
       list1: [
         {
           id: 1,
@@ -226,6 +228,7 @@ export default {
       const { actions } = this;
       if (mode === 'continue') {
         const loop = setInterval(() => {
+          this.loop = loop;
           if (actions[i] !== 'endMissionSuccess' && actions[i] !== 'endMissionFail') {
             while (actions[i] === 'isBlank' || actions[i] === 'isObstacle' || actions[i] === 'isTreasure' || actions[i] === 'isEdge') {
               i += 1;
@@ -261,6 +264,11 @@ export default {
     clear() {
       this.list = [];
       this.step = 0;
+      clearInterval(this.loop);
+      this.$emit('clear');
+    },
+    reset() {
+      clearInterval(this.loop);
       this.$emit('clear');
     },
   },
