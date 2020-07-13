@@ -28,12 +28,12 @@
     </code-start>
     <button type="button" class="btn btn-back btn-secondary" @click="EditMap"
         >返回</button>
-    <button type="button" class="btn btn-upload btn-secondary" @click="UploadMap"
-        >提交</button>
+    <button type="button" class="btn btn-upload btn-secondary" @click="ShareMap"
+        >发布</button>
   </div>
 
 </template>
-
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import MapBoard from '../components/MapEditor/MapBoard.vue';
 import ElementBoard from '../components/MapEditor/ElementBoard.vue';
@@ -53,6 +53,11 @@ export default {
   data() {
     return {
       state: 'edit',
+      DataSet: {
+        user_id: Number,
+        username: String,
+        state: Number,
+      },
     };
   },
   methods: {
@@ -75,6 +80,7 @@ export default {
       this.$refs.MapBoard.RotateCharacter();
     },
     SaveMap() {
+      this.$refs.MapBoard.saveMap(this.DataSet.user_id);
       this.state = 'test';
     },
     TestMap() {
@@ -83,12 +89,26 @@ export default {
     EditMap() {
       this.state = 'edit';
     },
-    UploadMap() {
+    ShareMap() {
       this.state = 'edit';
     },
     test(event) {
       this.$refs.GameBoard.takeAction(event);
     },
+  },
+  mounted() {
+    const url = 'http://127.0.0.1:8000/userInfo/';
+    axios.get(url).then(
+      response => {
+        var result = response.data;
+        console.log(result);
+        this.DataSet = result; 
+      }
+      ).catch(
+        response => {
+          alert('请求失败, 请先登录');
+          }
+      );
   },
 };
 </script>
