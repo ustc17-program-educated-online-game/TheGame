@@ -46,6 +46,7 @@
 </template>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+import axios from 'axios';
 import LoginTest from './LoginTest.json';
 
 export default {

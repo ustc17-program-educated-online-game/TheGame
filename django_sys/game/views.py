@@ -266,8 +266,9 @@ def map_editor(request):
         map.length = data['map']['length']
         map.width = data['map']['width']
         datalist = []
-        for i in range(map.width):
-            for j in range(map.length):
+        
+        for i in range(int(map.width)):
+            for j in range(int(map.length)):
                 datalist.append(str(data['map']['state'][i][j]))
         map.state = "".join(datalist)
         map.startx = data['map']['start']['x']

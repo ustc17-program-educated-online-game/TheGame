@@ -86,10 +86,29 @@ export default {
         ThisComponent.DataSet = response.data;
       });
     },
-    setMap(mapid) {
-      this.map = {
-        id: mapid,
+    saveMap(userid) {
+      this.DataSet.map.id = userid;
+      const ActionAnalyzePath = '/mapEditor/';
+      const passData = {
+        user_id: userid,
+        map: this.DataSet.map,
       };
+      this.$http({
+        url: ActionAnalyzePath,
+        method: 'post',
+        data: passData,
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      }).then((response) => {
+        console.log(response.data.message);
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
     },
     resetMap() {
       let i = 0;
@@ -200,15 +219,27 @@ export default {
     SelectElement(msg) {
       if (this.SelectBlock.state === true) {
         if (msg === 'obstacle') {
+          if (this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] === 3) {
+            this.DataSet.map.treasure.x = '-1';
+            this.DataSet.map.treasure.y = '-1';
+          }
           this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] = 2;
-        } else {
+        } else if (this.DataSet.map.treasure.x === '-1') {
           this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] = 3;
+          this.DataSet.map.treasure.x = this.SelectBlock.x.toString();
+          this.DataSet.map.treasure.y = this.SelectBlock.y.toString();
+        } else {
+          alert('最多有一个宝藏');
         }
       }
       this.updateMap();
     },
     RemoveElement() {
       if (this.SelectBlock.state === true) {
+        if (this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] === 3) {
+          this.DataSet.map.treasure.x = '-1';
+          this.DataSet.map.treasure.y = '-1';
+        }
         this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] = 1;
       }
       this.updateMap();

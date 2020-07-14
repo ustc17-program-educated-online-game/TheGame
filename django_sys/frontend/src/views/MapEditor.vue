@@ -16,28 +16,33 @@
         >测试</button>
   </div>
   <div class="GameInterface" v-else>
-    <game-board
-      ref="GameBoard"
+    <test-board
+      ref="TestBoard"
     >
-    </game-board>
+    </test-board>
     <check-point-info ref="CheckInfo"></check-point-info>
     <code-start
-      @takeAction="test($event)"
-      ref="code-block"
+      @takeAction="takeAction($event)"
+      @execute="execute(arguments)"
+      @clear="clear()"
+      @MissionSuccess="ShowSuccessInfo"
+      @MissionFail="ShowFailInfo"
+      ref="CodeStart"
     >
     </code-start>
     <button type="button" class="btn btn-back btn-secondary" @click="EditMap"
         >返回</button>
-    <button type="button" class="btn btn-upload btn-secondary" @click="UploadMap"
-        >提交</button>
+    <button type="button" class="btn btn-upload btn-secondary" @click="ShareMap"
+        >发布</button>
   </div>
 
 </template>
 
 <script>
+import axios from 'axios';
 import MapBoard from '../components/MapEditor/MapBoard.vue';
 import ElementBoard from '../components/MapEditor/ElementBoard.vue';
-import GameBoard from '../components/GameInterface/Interface/GameBoard.vue';
+import TestBoard from '../components/MapEditor/TestBoard.vue';
 import CheckPointInfo from '../components/GameInterface/Interface/CheckPointInfo.vue';
 import CodeStart from '../components/GameInterface/CodeBlock/CodeStart.vue';
 
@@ -45,7 +50,7 @@ export default {
   name: 'MapEditor',
   components: {
     MapBoard,
-    GameBoard,
+    TestBoard,
     CheckPointInfo,
     ElementBoard,
     CodeStart,
@@ -53,6 +58,11 @@ export default {
   data() {
     return {
       state: 'edit',
+      DataSet: {
+        user_id: Number,
+        username: String,
+        state: Number,
+      },
     };
   },
   methods: {
@@ -75,6 +85,7 @@ export default {
       this.$refs.MapBoard.RotateCharacter();
     },
     SaveMap() {
+      this.$refs.MapBoard.saveMap(this.DataSet.user_id);
       this.state = 'test';
     },
     TestMap() {
@@ -83,12 +94,56 @@ export default {
     EditMap() {
       this.state = 'edit';
     },
-    UploadMap() {
+    ShareMap() {
       this.state = 'edit';
     },
-    test(event) {
-      this.$refs.GameBoard.takeAction(event);
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
     },
+    takeAction(event) {
+      this.$refs.TestBoard.takeAction(event);
+    },
+    execute(arg) {
+      const mapid = this.$refs.TestBoard.DataSet.map.id;
+      const passData = {
+        id: mapid,
+        type: arg[1],
+        codeList: arg[0].codes,
+      };
+      const ActionAnalyzePath = '/game/';
+      this.$http({
+        url: ActionAnalyzePath,
+        method: 'post',
+        data: passData,
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      }).then((response) => {
+        console.log(response.data.actionList);
+        this.$refs.CodeStart.actions = response.data.actionList;
+        this.$refs.CodeStart.getActions(passData.type);
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    clear() {
+      this.$refs.TestBoard.clear();
+    },
+  },
+  mounted() {
+    const url = 'http://127.0.0.1:8000/userInfo/';
+    axios.get(url).then(
+      (response) => {
+        const result = response.data;
+        console.log(result);
+        this.DataSet = result;
+      },
+    ).catch(
+      () => {
+        alert('请求失败, 请先登录');
+      },
+    );
   },
 };
 </script>

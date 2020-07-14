@@ -25,8 +25,8 @@
         "y": "7"
       },
       "treasure": { 
-        "x": "x坐标",
-        "y": "y坐标",
+        "x": "-1",
+        "y": "-1",
         "collected": "0"
       },
       "character": {
