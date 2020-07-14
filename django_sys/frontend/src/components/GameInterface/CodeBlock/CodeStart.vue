@@ -252,9 +252,11 @@ export default {
         if (actions[this.step] === 'endMissionSuccess') {
           this.sucVisible = true;
           console.log('success');
+          this.$emit('MissionSuccess');
         } else if (actions[this.step] === 'endMissionFail') {
           this.sucVisible = true;
           console.log('fail');
+          this.$emit('MissionFail');
         }
       }
     },
@@ -265,10 +267,13 @@ export default {
       this.list = [];
       this.step = 0;
       clearInterval(this.loop);
+      this.actions = [];
       this.$emit('clear');
     },
     reset() {
       clearInterval(this.loop);
+      this.actions = [];
+      this.step = 0;
       this.$emit('clear');
     },
   },

@@ -91,11 +91,11 @@ export default {
     },
     ShowSuccessInfo() {
       this.$refs.SuccessInfo.visible = true;
-      this.$refs.GameBoard.clear();
+      this.$refs.CodeStart.reset();
     },
     ShowFailInfo() {
       this.$refs.FailInfo.visible = true;
-      this.$refs.GameBoard.clear();
+      this.$refs.CodeStart.reset();
     },
   },
 };
