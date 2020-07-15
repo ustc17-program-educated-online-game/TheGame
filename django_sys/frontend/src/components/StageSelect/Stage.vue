@@ -139,6 +139,7 @@ export default {
           this.$refs.StageInfo6.visible = true;
           this.$refs.StageInfo6.title = '最后的挑战';
           this.$refs.StageInfo6.levelid = '第六关';
+          this.$refs.StageInfo6.message = '正在制作中，敬请期待！';
           break;
         default:
           break;
