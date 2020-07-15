@@ -55,7 +55,7 @@
             <b-card-text>
                 可以查看游戏的玩法和一些小技巧
             </b-card-text>
-            <b-button href="/#/GameInterface" class="card-link">查看帮助</b-button>
+            <b-button href="/#/GameHelp" class="card-link">查看帮助</b-button>
             <img src="../../img/card3.jpg" class="picture">
             </b-card>
 

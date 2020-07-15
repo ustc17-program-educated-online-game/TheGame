@@ -4,6 +4,7 @@ import Homepage from '../views/Homepage.vue';
 import GameInterface from '../views/GameInterface.vue';
 import MapEditor from '../views/MapEditor.vue';
 import StageSelect from '../views/StageSelect.vue';
+import GameHelp from '../views/GameHelp.vue';
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/StageSelect',
     name: '关卡选择',
     component: StageSelect,
+  },
+  {
+    path: '/GameHelp',
+    name: '游戏帮助',
+    component: GameHelp,
   },
 ];
 
