@@ -21,7 +21,6 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios';
 import MapBlock from '../GameInterface/Interface/GameBoard/MapBlock.vue';

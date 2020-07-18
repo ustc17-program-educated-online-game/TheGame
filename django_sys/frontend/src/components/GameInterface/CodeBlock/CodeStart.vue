@@ -56,7 +56,7 @@
       class="btn btn-warning btn-restoration"
       @click="reset()"
     >
-      复位小人
+      复位
     </button>
   </div>
 </template>

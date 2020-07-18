@@ -47,7 +47,8 @@
         Start
       </span>
       <span v-else>
-        Treasure
+        <img src="../../../../img/treasure_open.jpg" v-show="treasureOpen">
+        <img src="../../../../img/treasure_close.jpg" v-show="!treasureOpen">
       </span>
     </div>
   </div>
@@ -57,6 +58,7 @@
 export default {
   name: 'MapBlock',
   props: {
+    treasureOpen: Boolean,
     state: Number,
     length: String,
     width: String,

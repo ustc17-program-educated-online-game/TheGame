@@ -14,6 +14,7 @@
           :start=DataSet.map.start
           :end=DataSet.map.end
           :character=DataSet.map.character
+          :treasureOpen=treasureOpen
         >
         </map-block>
       </div>
@@ -29,6 +30,7 @@ export default {
   data() {
     return {
       initialization: null,
+      treasureOpen: false,
       DataSet: {
         state: String,
         message: String,
@@ -120,13 +122,14 @@ export default {
           this.DataSet.map.character.state = 'u';
         }
       } else if (action === 'collectSuccess') {
-        console.log('collect_success');
+        this.treasureOpen = true;
       } else if (action === 'collectFail') {
-        console.log('collect_fail');
+        document.alert('打开失败');
       }
     },
     clear() {
       this.DataSet = JSON.parse(JSON.stringify(this.initialization));
+      this.treasureOpen = false;
     },
   },
 };
