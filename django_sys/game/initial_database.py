@@ -24,6 +24,9 @@ def initial_database():
     map5 = '1111111111111111111113111211111111111111111211111111111111111111111111111111111111111111111111111111'
     models.Map.objects.create(id=10005, name='第五关', length=10, width=10, state=map5, startx=4, starty=1, endx=4, endy=4,
                               treasurex=2, treasurey=1, characterType=1, characterState='r')
+    map6 = '2222222222211111111221222222122122222212211122111221212112222111211222212221122221222211122222222222'
+    models.Map.objects.create(id=10006, name='第六关', length=10, width=10, state=map6, startx=8, starty=1, endx=8, endy=8,
+                              characterType=1, characterState='u')
 
 
 #if __name__ == '__main__':

@@ -43,11 +43,11 @@
             <img src="../../img/card1.jpg" class="picture">
             </b-card>
 
-            <b-card title="背景故事" img-src="" img-alt="Image" img-top>
+            <b-card title="关卡选择" img-src="" img-alt="Image" img-top>
             <b-card-text>
-                在这里写游戏背景的简述
+                选择想要的关卡开始游戏吧
             </b-card-text>
-            <b-button href="/#/GameInterface" class="card-link">详细了解</b-button>
+            <b-button href="/#/StageSelect" class="card-link">关卡选择</b-button>
             <img src="../../img/card2.jpg" class="picture">
             </b-card>
 
@@ -55,7 +55,7 @@
             <b-card-text>
                 可以查看游戏的玩法和一些小技巧
             </b-card-text>
-            <b-button href="/#/GameInterface" class="card-link">查看帮助</b-button>
+            <b-button href="/#/GameHelp" class="card-link">查看帮助</b-button>
             <img src="../../img/card3.jpg" class="picture">
             </b-card>
 
