@@ -262,6 +262,10 @@ def map_editor(request):
         id = data['user_id']
         map = models.Map()
         map.id = id
+        try:
+            map.creator = data['user_name']
+        except:
+            pass
         map.name = data['map']['name']
         map.length = data['map']['length']
         map.width = data['map']['width']
@@ -299,3 +303,22 @@ def map_info(request):
         return JsonResponse({'message': 'map open success', 'map' : ClassToDict(map)})
     #else:
         #return render(request, 'map_info_test.html', locals())  # for test
+
+# return the information of users' maps
+def users_maps_info(request):
+    if request.method == 'POST':
+        data = {}
+        data['total'] = 0
+        total = 0
+        maps = models.Map.objects.all()
+        for map in maps:
+            if map.id < 10000:
+                total += 1
+                data[total] = {}
+                data[total]['map_id'] = map.id
+                data[total]['map_name'] = map.name
+                data[total]['user_name'] = map.creator
+        data['total'] = total
+        return JsonResponse(data)
+    #else:
+    #    return render(request, 'users_map_test.html', locals()) # For test

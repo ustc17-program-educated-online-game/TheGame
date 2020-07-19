@@ -23,7 +23,7 @@ from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'', TemplateView.as_view(template_name="index.html")),
+    path(r'', views1.login),
     path('index/', TemplateView.as_view(template_name="index.html")),
     path('userInfo/', views1.index),  # To get the user level messag
     path('login/', views1.login),
@@ -33,5 +33,6 @@ urlpatterns = [
     path('confirm/', views1.user_confirm),
     path('game/', views2.game), #To get the final codelist
     path('mapInfo/', views2.map_info), #To get the map data
-    path('mapEditor/', views2.map_editor) #Store the map data
+    path('mapEditor/', views2.map_editor), #Store the map data
+    path('usersMaps/', views2.users_maps_info)
 ]

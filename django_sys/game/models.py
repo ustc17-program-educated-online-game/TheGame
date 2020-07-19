@@ -6,6 +6,7 @@ class Map(models.Model):
 
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=128)
+    creator = models.CharField(max_length=128, default='admin')
     length = models.IntegerField()
     width = models.IntegerField()
     state = models.CharField(max_length=200)
