@@ -35,7 +35,7 @@
                             <template v-slot:button-content>
                                 我的账号
                             </template>
-                            <b-dropdown-item href="#">账号信息</b-dropdown-item>
+                            <b-dropdown-item href="/userInfo/">账号信息</b-dropdown-item>
                             <b-dropdown-item href="/logout/">退出登录</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </div>
@@ -61,7 +61,7 @@ export default {
     };
   },
   mounted() {
-    const url = 'http://127.0.0.1:8000/userInfo/';
+    const url = 'http://127.0.0.1:8000/userState/';
     axios.get(url).then(
       response => {
         var result = response.data;

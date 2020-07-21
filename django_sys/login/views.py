@@ -173,3 +173,17 @@ def logout(request):
         return redirect("/login/")
     request.session.flush()
     return redirect("/logout/")
+
+def userInfo(request):
+    username = request.session.get('user_name', None)
+    userinfo = {}
+    if not request.session.get('is_login', None):
+        userinfo['user_state'] = 0
+    else:
+        userinfo['user_state'] = 1
+        user = models.User.objects.get(name=username)
+        userinfo['user_name'] = user.name
+        userinfo['user_email'] = user.email
+        userinfo['user_sex'] = user.sex
+        userinfo['user_mobile'] = user.mobile
+    return JsonResponse(userinfo)

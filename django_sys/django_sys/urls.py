@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', views1.login),
     path('index/', TemplateView.as_view(template_name="index.html")),
-    path('userInfo/', views1.index),  # To get the user level messag
+    path('userState/', views1.index),  # To get the user state
     path('login/', views1.login),
     path('register/', views1.register),
     path('logout/', views1.logout),
@@ -34,5 +34,6 @@ urlpatterns = [
     path('game/', views2.game), #To get the final codelist
     path('mapInfo/', views2.map_info), #To get the map data
     path('mapEditor/', views2.map_editor), #Store the map data
-    path('usersMaps/', views2.users_maps_info)
+    path('usersMaps/', views2.users_maps_info),
+    path('userInfo/', views1.userInfo) #To get the userInfo
 ]
