@@ -86,11 +86,12 @@ export default {
         ThisComponent.DataSet = response.data;
       });
     },
-    saveMap(userid) {
+    saveMap(userid, username) {
       this.DataSet.map.id = userid;
       const ActionAnalyzePath = '/mapEditor/';
       const passData = {
         user_id: userid,
+        user_name: username,
         map: this.DataSet.map,
       };
       this.$http({

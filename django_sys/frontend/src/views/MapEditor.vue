@@ -56,6 +56,8 @@ import ElementBoard from '../components/MapEditor/ElementBoard.vue';
 import TestBoard from '../components/MapEditor/TestBoard.vue';
 import CheckPointInfo from '../components/GameInterface/Interface/CheckPointInfo.vue';
 import CodeStart from '../components/GameInterface/CodeBlock/CodeStart.vue';
+import SuccessInfo from '../components/MapEditor/SuccessInfo.vue';
+import FailInfo from '../components/MapEditor/FailInfo.vue';
 
 export default {
   name: 'MapEditor',
@@ -65,6 +67,8 @@ export default {
     CheckPointInfo,
     ElementBoard,
     CodeStart,
+    SuccessInfo,
+    FailInfo,
   },
   data() {
     return {
@@ -97,7 +101,7 @@ export default {
       this.$refs.MapBoard.RotateCharacter();
     },
     SaveMap() {
-      this.$refs.MapBoard.saveMap(this.DataSet.user_id);
+      this.$refs.MapBoard.saveMap(this.DataSet.user_id, this.DataSet.username);
       this.state = 'test';
     },
     TestMap() {
@@ -144,11 +148,11 @@ export default {
     },
     ShowSuccessInfo() {
       this.$refs.SuccessInfo.visible = true;
-      this.$refs.GameBoard.clear();
+      this.$refs.TestBoard.clear();
     },
     ShowFailInfo() {
       this.$refs.FailInfo.visible = true;
-      this.$refs.GameBoard.clear();
+      this.$refs.TestBoard.clear();
     },
   },
   mounted() {

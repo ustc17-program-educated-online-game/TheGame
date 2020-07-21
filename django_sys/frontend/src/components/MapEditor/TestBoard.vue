@@ -14,6 +14,7 @@
           :start=DataSet.map.start
           :end=DataSet.map.end
           :character=DataSet.map.character
+          :treasureOpen=treasureOpen
         >
         </map-block>
       </div>
@@ -30,6 +31,7 @@ export default {
   data() {
     return {
       initialization: null,
+      treasureOpen: false,
       userinfo: {
         user_id: Number,
         username: String,
@@ -126,9 +128,9 @@ export default {
           this.DataSet.map.character.state = 'u';
         }
       } else if (action === 'collectSuccess') {
-        console.log('collect_success');
+        this.treasureOpen = true;
       } else if (action === 'collectFail') {
-        console.log('collect_fail');
+        document.alert('打开失败');
       }
     },
 
@@ -137,7 +139,7 @@ export default {
     },
   },
   mounted() {
-    const url = 'http://127.0.0.1:8000/userInfo/';
+    const url = 'http://127.0.0.1:8000/userState/';
     axios.get(url).then(
       (response) => {
         const result = response.data;

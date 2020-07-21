@@ -36,6 +36,8 @@ export default {
         else if (this.position.x < 0) this.position.x = 0;
         if (this.position.y > 7) this.position.y = 7;
         else if (this.position.y < 0) this.position.y = 0;
+        if (this.position.x === undefined) this.position.x = 0;
+        if (this.position.y === undefined) this.position.y = 0;
         this.$emit('set-point', this.inputType, this.position);
       },
       deep: true,
