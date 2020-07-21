@@ -1,39 +1,50 @@
 /* eslint-disable no-alert */
 <template>
-  <div class="MapEditor" v-if="state==='edit'">
-    <map-board ref="MapBoard"></map-board>
-    <element-board ref="ElementBoard"
-    @set-point="SetPoint"
-    @select-element="SelectElement"
-    @move-element="MoveElement"
-    @reset-board="ResetBoard"
-    @remove-element="RemoveElement"
-    @rotate-character="RotateCharacter">
-    </element-board>
-    <button type="button" class="btn btn-save btn-secondary" @click="SaveMap"
-        >保存</button>
-    <button type="button" class="btn btn-test btn-secondary" @click="TestMap"
-        >测试</button>
+  <div v-if="login===true">
+    <div class="MapEditor" v-if="state==='edit'">
+      <map-board ref="MapBoard"></map-board>
+      <element-board ref="ElementBoard"
+      @set-point="SetPoint"
+      @select-element="SelectElement"
+      @move-element="MoveElement"
+      @reset-board="ResetBoard"
+      @remove-element="RemoveElement"
+      @rotate-character="RotateCharacter">
+      </element-board>
+      <button type="button" class="btn btn-save btn-secondary" @click="SaveMap"
+          >保存</button>
+      <button type="button" class="btn btn-test btn-secondary" @click="TestMap"
+          >测试</button>
+    </div>
+    <div class="GameInterface" v-else>
+      <test-board
+        ref="TestBoard"
+      >
+      </test-board>
+      <success-info
+        ref="SuccessInfo"
+        mapid="自定地图"></success-info>
+      <fail-info
+        ref="FailInfo"
+        mapid="自定地图"></fail-info>
+      <check-point-info ref="CheckInfo"></check-point-info>
+      <code-start
+        @takeAction="takeAction($event)"
+        @execute="execute(arguments)"
+        @clear="clear()"
+        @MissionSuccess="ShowSuccessInfo"
+        @MissionFail="ShowFailInfo"
+        ref="CodeStart"
+      >
+      </code-start>
+      <button type="button" class="btn btn-back btn-secondary" @click="EditMap"
+          >返回</button>
+      <button type="button" class="btn btn-upload btn-secondary" @click="ShareMap"
+          >发布</button>
+    </div>
   </div>
-  <div class="GameInterface" v-else>
-    <test-board
-      ref="TestBoard"
-    >
-    </test-board>
-    <check-point-info ref="CheckInfo"></check-point-info>
-    <code-start
-      @takeAction="takeAction($event)"
-      @execute="execute(arguments)"
-      @clear="clear()"
-      @MissionSuccess="ShowSuccessInfo"
-      @MissionFail="ShowFailInfo"
-      ref="CodeStart"
-    >
-    </code-start>
-    <button type="button" class="btn btn-back btn-secondary" @click="EditMap"
-        >返回</button>
-    <button type="button" class="btn btn-upload btn-secondary" @click="ShareMap"
-        >发布</button>
+  <div v-else>
+    请先登录再使用地图编辑器
   </div>
 
 </template>
@@ -58,6 +69,7 @@ export default {
   data() {
     return {
       state: 'edit',
+      login: false,
       DataSet: {
         user_id: Number,
         username: String,
@@ -130,18 +142,32 @@ export default {
     clear() {
       this.$refs.TestBoard.clear();
     },
+    ShowSuccessInfo() {
+      this.$refs.SuccessInfo.visible = true;
+      this.$refs.GameBoard.clear();
+    },
+    ShowFailInfo() {
+      this.$refs.FailInfo.visible = true;
+      this.$refs.GameBoard.clear();
+    },
   },
   mounted() {
-    const url = 'http://127.0.0.1:8000/userInfo/';
+    const url = 'http://127.0.0.1:8000/userState/';
     axios.get(url).then(
       (response) => {
         const result = response.data;
         console.log(result);
         this.DataSet = result;
+        if (this.DataSet.user_id === null) {
+          this.login = false;
+        } else {
+          this.login = true;
+        }
       },
     ).catch(
-      () => {
-        alert('请求失败, 请先登录');
+      (error) => {
+        console.log(error);
+        alert('请先登陆');
       },
     );
   },

@@ -211,6 +211,8 @@ export default {
       if (type === 'start') {
         this.DataSet.map.start.x = px;
         this.DataSet.map.start.y = py;
+        this.DataSet.map.character.x = px;
+        this.DataSet.map.character.y = py;
       } else {
         this.DataSet.map.end.x = px;
         this.DataSet.map.end.y = py;
@@ -245,11 +247,19 @@ export default {
       this.updateMap();
     },
     RotateCharacter() {
-      if (this.DataSet.character.state === 'u') this.DataSet.character.state = 'l';
-      else if (this.DataSet.character.state === 'l') this.DataSet.character.state = 'd';
-      else if (this.DataSet.character.state === 'd') this.DataSet.character.state = 'r';
-      else if (this.DataSet.character.state === 'r') this.DataSet.character.state = 'u';
+      console.log(this.DataSet.map.character.state);
+      if (this.DataSet.map.character.state === 'u') {
+        this.DataSet.map.character.state = 'l';
+      } else if (this.DataSet.map.character.state === 'l') {
+        this.DataSet.map.character.state = 'd';
+      } else if (this.DataSet.map.character.state === 'd') {
+        this.DataSet.map.character.state = 'r';
+      } else {
+        this.DataSet.map.character.state = 'u';
+      }
+      console.log(this.DataSet.map.character.state);
       this.updateMap();
+      console.log(this.DataSet.map.character.state);
     },
   },
 };
