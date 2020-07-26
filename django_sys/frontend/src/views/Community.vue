@@ -59,9 +59,15 @@ export default {
     },
     getMaps() {
       const UserMapsPath = '/usersMaps/';
+      const passData = {
+        id: this.id,
+        cnt: this.cnt,
+      };
+      console.log(passData);
       this.$http({
         url: UserMapsPath,
         method: 'post',
+        data: passData,
         headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
       }).then((response) => {
         console.log(response.data);
@@ -72,22 +78,23 @@ export default {
     },
     FirstPage() { // 跳转到第一面
       this.id = 1;
+      this.getMaps();
     },
     PreviousPage() { // 前一面
       if (this.id - this.cnt > 0) {
         this.id -= this.cnt;
       }
-      // console.log(this.id);
+      this.getMaps();
     },
     NextPage() { // 后一面
       if (this.id + this.cnt < this.DataSet.maxid) {
         this.id += this.cnt;
       }
-      // console.log(this.id);
-      // console.log(this.DataSet.maxid);
+      this.getMaps();
     },
     LastPage() { // 最后一面
       this.id = Math.floor((this.DataSet.maxid - 1) / this.cnt) * this.cnt + 1;
+      this.getMaps();
     },
   },
 };
