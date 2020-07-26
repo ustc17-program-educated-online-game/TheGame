@@ -9,7 +9,7 @@
           <div class="card-body">
             <h5 class="card-title">{{item.map_name}}</h5>
             <p class="card-text">作者：{{item.user_name}}</p>
-            <b-button href="/#/" class="card-link">开始游戏</b-button>
+            <button href="/#/" class="btn btn-primary">开始游戏</button>
             <!-- 这里还要根据地图编号增加对应的开始游戏链接 -->
           </div>
           <div class="card-footer text-muted">
@@ -18,6 +18,16 @@
         </div>
       </div>
     </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" role="progressbar"
+      style="width: this.id/this.maxid"
+      aria-valuenow="this.id/this.maxid*100" aria-valuemin="0" aria-valuemax="100">
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button @click="PreviousPage()" class="btn btn-primary">上一页</button>
+      <button @click="NextPage()" class="btn btn-primary">下一页</button>
+    </nav>
   </div>
 </template>
 
@@ -28,7 +38,7 @@ export default {
   name: 'Community',
   data() {
     return {
-      id: Number, // 查询的地图编号的下标，一次查询的地图数根据页面待定
+      id: Number, // 查询的地图编号的下界，一次查询的地图数根据页面待定
       cnt: Number, // 一页显示的地图数
       maxid: Number, // 最大的地图编号，用来防止越界，向后端查询
       DataSet: {
@@ -36,10 +46,12 @@ export default {
       },
     };
   },
+  created() {
+    this.id = 1; // 实际开始的编号要根据玩家自定义地图的最小编号来确定
+    this.cnt = 10;
+  },
   mounted() {
-    // console.log(LoginTest);
     this.DataSet = CommunityTest;
-    // console.log(this.DataSet.state);
   },
   methods: {
     PreviousPage() {
