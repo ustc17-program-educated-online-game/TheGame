@@ -309,9 +309,11 @@ def users_maps_info(request):
     if request.method == 'POST':
         data = {}
         data["data"] = []
+        maxid = 0
         maps = models.Map.objects.all()
         for map in maps:
             if map.id < 10000:
+                maxid = map.id
                 try:
                     temp = {}
                     temp["map_id"] = map.id
@@ -323,6 +325,7 @@ def users_maps_info(request):
                     temp = {}
                     temp["message"] = "fail"
                     data["data"].append(temp)
+            data["maxid"] = maxid
         return JsonResponse(data)
     #else:
     #    return render(request, 'users_map_test.html', locals()) # For test
