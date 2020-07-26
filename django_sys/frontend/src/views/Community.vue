@@ -18,15 +18,15 @@
         </div>
       </div>
     </div>
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped" role="progressbar"
-      style="width: this.id/this.maxid"
-      aria-valuenow="this.id/this.maxid*100" aria-valuemin="0" aria-valuemax="100">
-      </div>
+    <div>
+      <b-progress :value="id" :max="DataSet.maxid" class="mb-3">
+      </b-progress>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button @click="FirstPage()" class="btn btn-primary">第一页</button>
       <button @click="PreviousPage()" class="btn btn-primary">上一页</button>
       <button @click="NextPage()" class="btn btn-primary">下一页</button>
+      <button @click="LastPage()" class="btn btn-primary">最后一页</button>
     </nav>
   </div>
 </template>
@@ -40,29 +40,38 @@ export default {
     return {
       id: Number, // 查询的地图编号的下界，一次查询的地图数根据页面待定
       cnt: Number, // 一页显示的地图数
-      maxid: Number, // 最大的地图编号，用来防止越界，向后端查询
       DataSet: {
+        maxid: Number, // 最大的地图编号，用来防止越界，向后端查询
         data: [],
       },
     };
   },
   created() {
-    this.id = 1; // 实际开始的编号要根据玩家自定义地图的最小编号来确定
+    this.id = 1; // 实际开始的编号要根据玩家自定义地图的最小编号来确定,修改时下面的跳转第一面也要改
     this.cnt = 10;
   },
   mounted() {
     this.DataSet = CommunityTest;
   },
   methods: {
-    PreviousPage() {
+    FirstPage() { // 跳转到第一面
+      this.id = 1;
+    },
+    PreviousPage() { // 前一面
       if (this.id - this.cnt > 0) {
         this.id -= this.cnt;
       }
+      // console.log(this.id);
     },
-    NextPage() {
-      if (this.id + this.cnt > this.maxid) {
+    NextPage() { // 后一面
+      if (this.id + this.cnt < this.DataSet.maxid) {
         this.id += this.cnt;
       }
+      // console.log(this.id);
+      // console.log(this.DataSet.maxid);
+    },
+    LastPage() { // 最后一面
+      this.id = Math.floor((this.DataSet.maxid - 1) / this.cnt) * this.cnt + 1;
     },
   },
 };
