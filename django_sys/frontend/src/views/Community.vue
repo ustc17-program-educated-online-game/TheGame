@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import CommunityTest from './CommunityTest.json';
 
 export default {
   name: 'Community',
@@ -49,11 +48,28 @@ export default {
   created() {
     this.id = 1; // 实际开始的编号要根据玩家自定义地图的最小编号来确定
     this.cnt = 10;
-  },
-  mounted() {
-    this.DataSet = CommunityTest;
+    this.getMaps();
   },
   methods: {
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    },
+    getMaps() {
+      const UserMapsPath = '/usersMaps/';
+      this.$http({
+        url: UserMapsPath,
+        method: 'post',
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      }).then((response) => {
+        console.log(response.data);
+        this.DataSet = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     PreviousPage() {
       if (this.id - this.cnt > 0) {
         this.id -= this.cnt;
