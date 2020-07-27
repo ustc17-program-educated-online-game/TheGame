@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-info" v-if="visible">
+  <div class="card card-info intro-card" v-if="visible">
     <div class="card-header">
       <h5 class="card-title">{{this.levelid}}</h5>
     </div>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style>
-.card-info {
+.intro-card {
   position: absolute;
   text-align: left;
   top: 0%;
