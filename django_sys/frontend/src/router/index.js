@@ -16,7 +16,32 @@ const routes = [
     component: Homepage,
   },
   {
-    path: '/GameInterface',
+    path: '/GameInterface/10001',
+    name: '游戏界面',
+    component: GameInterface,
+  },
+  {
+    path: '/GameInterface/10002',
+    name: '游戏界面',
+    component: GameInterface,
+  },
+  {
+    path: '/GameInterface/10003',
+    name: '游戏界面',
+    component: GameInterface,
+  },
+  {
+    path: '/GameInterface/10004',
+    name: '游戏界面',
+    component: GameInterface,
+  },
+  {
+    path: '/GameInterface/10005',
+    name: '游戏界面',
+    component: GameInterface,
+  },
+  {
+    path: '/GameInterface/10006',
     name: '游戏界面',
     component: GameInterface,
   },

@@ -9,7 +9,6 @@
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
                     <b-nav-item href="/">首页</b-nav-item>
-                    <b-nav-item href="/#/GameInterface">开始游戏</b-nav-item>
                     <b-nav-item href="/#/StageSelect">关卡选择</b-nav-item>
                     <b-nav-item href="/#/MapEditor">地图编辑器</b-nav-item>
                     <b-nav-item href="/#/Community">玩家社区</b-nav-item>

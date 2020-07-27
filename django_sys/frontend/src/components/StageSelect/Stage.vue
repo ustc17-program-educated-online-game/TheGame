@@ -6,7 +6,7 @@
                 <b-card-text>
                     <b>起飞</b>
                 </b-card-text>
-                <b-button href="#">开始游戏</b-button>
+                <b-button href="../#/GameInterface/10001">开始游戏</b-button>
                 <button type="button" class="btn btn-info btn-secondary"
                 @click="ShowInfo(1)">背景故事</button>
                 <stage-info ref="StageInfo1"></stage-info>
@@ -18,7 +18,7 @@
                 <b-card-text>
                     <b>冲出大气层</b>
                 </b-card-text>
-                <b-button href="#">开始游戏</b-button>
+                <b-button href="../#/GameInterface/10002">开始游戏</b-button>
                 <button type="button" class="btn btn-info btn-secondary"
                 @click="ShowInfo(2)">背景故事</button>
                 <stage-info ref="StageInfo2"></stage-info>
@@ -30,7 +30,7 @@
                 <b-card-text>
                     <b>太阳系漫游</b>
                 </b-card-text>
-                <b-button href="#">开始游戏</b-button>
+                <b-button href="../#/GameInterface/10003">开始游戏</b-button>
                 <button type="button" class="btn btn-info btn-secondary"
                 @click="ShowInfo(3)">背景故事</button>
                 <stage-info ref="StageInfo3"></stage-info>
@@ -47,7 +47,7 @@
                 <b-card-text>
                     <b>新的旅程</b>
                 </b-card-text>
-                <b-button href="#">开始游戏</b-button>
+                <b-button href="../#/GameInterface/10004">开始游戏</b-button>
                 <button type="button" class="btn btn-info btn-secondary"
                 @click="ShowInfo(4)">背景故事</button>
                 <stage-info ref="StageInfo4"></stage-info>
@@ -59,7 +59,7 @@
                 <b-card-text>
                     <b>寻找宝藏</b>
                 </b-card-text>
-                <b-button href="#">开始游戏</b-button>
+                <b-button href="../#/GameInterface/10005">开始游戏</b-button>
                 <button type="button" class="btn btn-info btn-secondary"
                 @click="ShowInfo(5)">背景故事</button>
                 <stage-info ref="StageInfo5"></stage-info>
@@ -71,7 +71,7 @@
                 <b-card-text>
                     <b>最后的挑战</b>
                 </b-card-text>
-                <b-button href="#">开始游戏</b-button>
+                <b-button href="../#/GameInterface/10006">开始游戏</b-button>
                 <button type="button" class="btn btn-info btn-secondary"
                 @click="ShowInfo(6)">背景故事</button>
                 <stage-info ref="StageInfo6"></stage-info>

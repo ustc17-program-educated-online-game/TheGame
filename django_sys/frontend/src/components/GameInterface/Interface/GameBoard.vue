@@ -1,8 +1,5 @@
 <template>
   <div class="GameBoard border border-primary rounded">
-    <button @click="getMap(1000)" style="top: 200px; position: absolute;">
-      Click here
-    </button>
     <div v-for="(states, index1) in DataSet.map.state" :key="index1">
       <div v-for="(state, index2) in states" :key="index2">
         <map-block
@@ -131,6 +128,12 @@ export default {
       this.DataSet = JSON.parse(JSON.stringify(this.initialization));
       this.treasureOpen = false;
     },
+  },
+  mounted() {
+    const mapidpath = this.$route.path;
+    const mapid = mapidpath.replace('/GameInterface/', '');
+    console.log(mapid);
+    this.getMap(Number(mapid));
   },
 };
 </script>
