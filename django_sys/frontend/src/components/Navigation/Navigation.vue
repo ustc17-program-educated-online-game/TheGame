@@ -35,19 +35,28 @@
                             <template v-slot:button-content>
                                 我的账号
                             </template>
-                            <b-dropdown-item href="/userInfo/">账号信息</b-dropdown-item>
+                            <b-dropdown-item
+                              @click="ShowUserInfo"
+                              >账号信息</b-dropdown-item>
                             <b-dropdown-item href="/logout/">退出登录</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </div>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
+        <user-info
+          ref="UserInfo"
+          :username="DataSet.username"
+          :usersex="DataSet.usersex"
+          :useremail="DataSet.useremail"
+          :usermobile="DataSet.usermobile"></user-info>
     </div>
 </template>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 import axios from 'axios';
 import LoginTest from './LoginTest.json';
+import UserInfo from './UserInfo.vue'
 
 export default {
   name: 'Navigation',
@@ -56,9 +65,15 @@ export default {
       DataSet: {
         //user_id: Number,
         username: String,
+        usersex: String,
+        useremail: String,
+        usermobile: String,
         state: Number,
       },
     };
+  },
+  components: {
+    UserInfo,
   },
   mounted() {
     const url = 'http://127.0.0.1:8000/userState/';
@@ -74,6 +89,11 @@ export default {
           }
       );
   },
+  methods: {
+    ShowUserInfo(){
+      this.$refs.UserInfo.visible = true;
+    }
+  }
   /*mounted() {
     //console.log(LoginTest);
     this.DataSet = LoginTest;

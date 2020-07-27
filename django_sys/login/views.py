@@ -73,11 +73,12 @@ def index(request):
     #if request.method == 'POST':
     user_id = request.session.get('user_id', None)
     user_name = request.session.get('user_name', None)
+    user = models.User.objects.get(name=user_name)
     if not request.session.get('is_login', None):
         user_level = 0
     else:
         user_level = 1
-    return JsonResponse({'user_id': user_id, 'username': user_name, 'state': user_level})
+    return JsonResponse({'user_id': user_id, 'username': user_name, 'state': user_level, 'useremail':user.email, 'usersex':user.sex, 'usermobile':user.mobile})
     #else:
         #return render(request, 'login/index.html', locals())
 
