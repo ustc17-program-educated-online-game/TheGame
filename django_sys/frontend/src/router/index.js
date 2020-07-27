@@ -5,6 +5,7 @@ import GameInterface from '../views/GameInterface.vue';
 import MapEditor from '../views/MapEditor.vue';
 import StageSelect from '../views/StageSelect.vue';
 import GameHelp from '../views/GameHelp.vue';
+import Community from '../views/Community.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/GameHelp',
     name: '游戏帮助',
     component: GameHelp,
+  },
+  {
+    path: '/Community',
+    name: '玩家社区',
+    component: Community,
   },
 ];
 

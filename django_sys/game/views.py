@@ -306,19 +306,29 @@ def map_info(request):
 
 # return the information of users' maps
 def users_maps_info(request):
+    requestData = json.loads(request.body)
+    print(requestData)
     if request.method == 'POST':
         data = {}
-        data['total'] = 0
-        total = 0
+        data["data"] = []
+        maxid = 0
         maps = models.Map.objects.all()
+        maxid = maps[maps.count() - 1].id
         for map in maps:
             if map.id < 10000:
-                total += 1
-                data[total] = {}
-                data[total]['map_id'] = map.id
-                data[total]['map_name'] = map.name
-                data[total]['user_name'] = map.creator
-        data['total'] = total
+                if map.id >= requestData['id'] and map.id < requestData['id'] + requestData['cnt']:
+                    try:
+                        temp = {}
+                        temp["map_id"] = map.id
+                        temp["map_name"] = map.name
+                        temp["user_name"] = map.creator
+                        temp["message"] = "success"
+                        data["data"].append(temp)
+                    except:
+                        temp = {}
+                        temp["message"] = "fail"
+                        data["data"].append(temp)
+            data["maxid"] = maxid
         return JsonResponse(data)
     #else:
     #    return render(request, 'users_map_test.html', locals()) # For test
