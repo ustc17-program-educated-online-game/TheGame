@@ -35,5 +35,4 @@ urlpatterns = [
     path('mapInfo/', views2.map_info), #To get the map data
     path('mapEditor/', views2.map_editor), #Store the map data
     path('usersMaps/', views2.users_maps_info),
-    path('userInfo/', views1.userInfo) #To get the userInfo
 ]
