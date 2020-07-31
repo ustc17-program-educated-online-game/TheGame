@@ -307,7 +307,6 @@ def map_info(request):
 # return the information of users' maps
 def users_maps_info(request):
     requestData = json.loads(request.body)
-    print(requestData)
     if request.method == 'POST':
         data = {}
         data["data"] = []
@@ -328,7 +327,7 @@ def users_maps_info(request):
                         temp = {}
                         temp["message"] = "fail"
                         data["data"].append(temp)
-            data["maxid"] = maxid
+        data["maxid"] = maxid
         return JsonResponse(data)
     #else:
     #    return render(request, 'users_map_test.html', locals()) # For test

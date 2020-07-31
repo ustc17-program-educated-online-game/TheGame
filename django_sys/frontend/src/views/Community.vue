@@ -9,7 +9,7 @@
           <div class="card-body">
             <h5 class="card-title">{{item.map_name}}</h5>
             <p class="card-text">作者：{{item.user_name}}</p>
-            <button href="/#/" class="btn btn-primary">开始游戏</button>
+            <a :href="'/#/GameInterface/' + item.map_id" class="btn btn-primary">开始游戏</a>
             <!-- 这里还要根据地图编号增加对应的开始游戏链接 -->
           </div>
           <div class="card-footer text-muted">

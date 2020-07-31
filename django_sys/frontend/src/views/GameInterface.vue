@@ -41,6 +41,11 @@ import CodeStart from '../components/GameInterface/CodeBlock/CodeStart.vue';
 
 export default {
   name: 'GameInterface',
+  data() {
+    return {
+      map_id: -1,
+    };
+  },
   components: {
     CodeStart,
     GameBoard,
