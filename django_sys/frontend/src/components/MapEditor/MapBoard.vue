@@ -124,6 +124,8 @@ export default {
         x: 2,
         y: 1,
       };
+      this.DataSet.map.treasure.x = '-1';
+      this.DataSet.map.treasure.y = '-1';
       this.updateMap();
     },
     updateMap() {
@@ -154,8 +156,8 @@ export default {
             y: '7',
           },
           treasure: {
-            x: 'x坐标',
-            y: 'y坐标',
+            x: '-1',
+            y: '-1',
             collected: '0',
           },
           character: {
@@ -222,7 +224,11 @@ export default {
     SelectElement(msg) {
       if (this.SelectBlock.state === true) {
         if (msg === 'obstacle') {
-          if (this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] === 3) {
+          if (this.DataSet.map.start.x === this.SelectBlock.x && this.DataSet.map.start.y === this.SelectBlock.y) {
+            alert('起点处不可以添加障碍物');
+          } else if (this.DataSet.map.end.x === this.SelectBlock.x && this.DataSet.map.end.y === this.SelectBlock.y) {
+            alert('终点处不可以添加障碍物');
+          } else if (this.DataSet.map.state[this.SelectBlock.x][this.SelectBlock.y] === 3) {
             this.DataSet.map.treasure.x = '-1';
             this.DataSet.map.treasure.y = '-1';
           }

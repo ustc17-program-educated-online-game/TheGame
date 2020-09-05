@@ -74,6 +74,7 @@ export default {
     return {
       state: 'edit',
       login: false,
+      passed: false,
       DataSet: {
         user_id: Number,
         username: String,
@@ -101,17 +102,26 @@ export default {
       this.$refs.MapBoard.RotateCharacter();
     },
     SaveMap() {
+      alert('当前地图已保存');
       this.$refs.MapBoard.saveMap(this.DataSet.user_id, this.DataSet.username);
-      this.state = 'test';
     },
     TestMap() {
-      this.state = 'test';
+      if (this.$refs.MapBoard.DataSet.map.treasure.x === '-1') {
+        alert('请添加至少一个宝藏');
+      } else {
+        this.state = 'test';
+      }
     },
     EditMap() {
+      this.passed = false;
       this.state = 'edit';
     },
     ShareMap() {
-      this.state = 'edit';
+      if (this.passed === true) {
+        this.state = 'edit';
+      } else {
+        alert('请先通过地图测试');
+      }
     },
     getCookie(name) {
       const value = `; ${document.cookie}`;
@@ -147,6 +157,7 @@ export default {
       this.$refs.TestBoard.clear();
     },
     ShowSuccessInfo() {
+      this.passed = true;
       this.$refs.SuccessInfo.visible = true;
       this.$refs.TestBoard.clear();
     },
