@@ -10,7 +10,12 @@
       >
       打开宝箱并到达目的地，通关成功</div>
       <a @click="visible=false" class="btn btn-outline-danger close-info">关闭</a>
-      <a class="btn btn-outline-danger close-info">下一关</a>
+      <button
+        @click="nextStage"
+        class="btn btn-outline-danger close-info"
+      >
+        下一关
+      </button>
     </div>
   </div>
 </template>
@@ -20,11 +25,17 @@ export default {
   name: 'SuccessInfo',
   props: {
     mapid: String,
+    id: Number,
   },
   data() {
     return {
       visible: false,
     };
+  },
+  methods: {
+    nextStage() {
+      this.$emit('nextStage');
+    },
   },
 };
 </script>

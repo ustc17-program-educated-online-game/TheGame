@@ -75,20 +75,26 @@ export default {
     UserInfo,
   },
   mounted() {
-    const url = 'http://127.0.0.1:8000/userState/';
-    axios.get(url).then(
-      response => {
+    const url = '/userState/';
+    this.$http({
+        url: url,
+        method: 'get',
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      }).then((response) => {
         var result = response.data;
         console.log(result);
         this.DataSet = result;
-      }
-      ).catch(
-        response => {
-          alert('请求失败');
-          }
-      );
+      }).catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
+    getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    },
     ShowUserInfo(){
       this.$refs.UserInfo.visible = true;
     }

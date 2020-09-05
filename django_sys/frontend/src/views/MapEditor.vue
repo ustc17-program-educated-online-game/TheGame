@@ -156,7 +156,7 @@ export default {
     },
   },
   mounted() {
-    const url = 'http://127.0.0.1:8000/userState/';
+    const url = '/userState/';
     axios.get(url).then(
       (response) => {
         const result = response.data;
