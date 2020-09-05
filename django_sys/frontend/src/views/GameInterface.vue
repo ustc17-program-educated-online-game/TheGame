@@ -8,7 +8,9 @@
     <hint-info ref="HintInfo"></hint-info>
     <success-info
       ref="SuccessInfo"
-      mapid="第一关"></success-info>
+      mapid="第一关"
+      @nextStage="nextStage"
+      :id=id></success-info>
     <fail-info
       ref="FailInfo"
       mapid="第一关"></fail-info>
@@ -43,7 +45,7 @@ export default {
   name: 'GameInterface',
   data() {
     return {
-      map_id: -1,
+      id: -1,
     };
   },
   components: {
@@ -101,6 +103,16 @@ export default {
     ShowFailInfo() {
       this.$refs.FailInfo.visible = true;
       this.$refs.CodeStart.reset();
+    },
+    nextStage() {
+      const mapid = this.$refs.GameBoard.DataSet.map.id;
+      this.id = mapid;
+      const path = `#/GameInterface/${Number(mapid) + 1}`;
+      this.$http({
+        url: path,
+        method: 'get',
+        headers: { 'X-CSRFToken': this.getCookie('csrftoken') },
+      });
     },
   },
 };
